@@ -5,5 +5,5 @@ ls
 echo "============================================="
 echo " Initializing Terraform... "
 terraform version
-#terraform init 
+terraform init 
 terraform plan
