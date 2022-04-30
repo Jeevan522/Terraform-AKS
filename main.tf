@@ -16,7 +16,6 @@
 
 terraform {
   required_version = "=0.12.29"
-  #filepath = "cloud-deployment/terraformEnvSetup/main.tf"
   backend "azurerm" {
     resource_group_name  = "k8s"
     storage_account_name = "demo1storageaccount"
