@@ -3,6 +3,10 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "=3.4.0"
+      resource_group_name  = "k8s"
+      storage_account_name = "demo1storageaccount"
+      container_name       = "devops"
+      key                  = "terraform.tfstate"
 
     }
   }
