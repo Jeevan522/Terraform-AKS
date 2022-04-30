@@ -14,7 +14,7 @@
 # }
 
 terraform {
-  required_version = "=1.1.9"
+  required_version = "=0.12.29"
   backend "azurerm" {
     resource_group_name  = "k8s"
     storage_account_name = "demo1storageaccount"
