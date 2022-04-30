@@ -35,4 +35,3 @@ resource "azurerm_resource_group" "rg-k8s" {
   name     = "rg-k8s"
   location = var.rg_location
 }
-
