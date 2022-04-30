@@ -1,20 +1,35 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=3.4.0"
-      resource_group_name  = "k8s"
-      storage_account_name = "demo1storageaccount"
-      container_name       = "devops"
-      key                  = "terraform.tfstate"
+# terraform {
+#   required_providers {
+#     azurerm = {
+#       source  = "hashicorp/azurerm"
+#       version = "=3.4.0"
 
-    }
+#     }
+#   }
+# }
+
+# # Configure the Microsoft Azure Provider
+# provider "azurerm" {
+#   features {}
+# }
+
+
+terraform {
+  required_version = "=0.12.29"
+  #filepath = "cloud-deployment/terraformEnvSetup/main.tf"
+  backend "azurerm" {
+    resource_group_name  = "k8s"
+    storage_account_name = "demo1storageaccount"
+    container_name       = "devops"
+    key                  = "terraform.tfstate"
   }
 }
 
-# Configure the Microsoft Azure Provider
 provider "azurerm" {
+  version = "~>2.0"
   features {}
+  
+  
 }
 
 # Create a resource group
