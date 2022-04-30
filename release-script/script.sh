@@ -1,3 +1,4 @@
+cd ..
 echo "============================================="
 echo " Initializing Terraform... "
 terraform version
