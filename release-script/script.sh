@@ -1,4 +1,4 @@
-cd ..
+cd ../
 echo "Working dir"
 pwd
 ls
