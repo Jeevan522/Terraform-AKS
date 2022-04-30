@@ -2,11 +2,8 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.0.0"
-      resource_group_name  = "emstrstate"
-      storage_account_name = "emstrstate15482"
-      container_name       = "devops"
-      key                  = "terraform.tfstate"
+      version = "=3.4.0"
+
     }
   }
 }
@@ -17,7 +14,7 @@ provider "azurerm" {
 }
 
 # Create a resource group
-resource "azurerm_resource_group" "rg-aks" {
-  name     = "AKS-RG"
+resource "azurerm_resource_group" "rg-k8s" {
+  name     = "rg-k8s"
   location = var.rg_location
 }
