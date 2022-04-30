@@ -28,7 +28,6 @@ provider "azurerm" {
   version = "~>2.0"
   features {}
   
-  
 }
 
 # Create a resource group
