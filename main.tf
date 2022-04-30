@@ -14,14 +14,22 @@
 # }
 
 terraform {
-  required_version = "=1.1.9"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+# terraform {
+#   required_version = "=1.1.9"
   backend "azurerm" {
     resource_group_name  = "k8s"
     storage_account_name = "demo1storageaccount"
     container_name       = "devops"
     key                  = "terraform.tfstate"
   }
-}
+#}
 
 provider "azurerm" {
   version = "~>2.0"
