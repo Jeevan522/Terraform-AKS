@@ -10,6 +10,3 @@ variable aks_subnet_name {
   default = "k8s-subnet"
 }
 
-variable virtual_network_name {
-  default = "k8s-VN"
-}
