@@ -1,19 +1,3 @@
-# terraform {
-#   required_providers {
-#     azurerm = {
-#       source  = "hashicorp/azurerm"
-#       version = "=3.4.0"
-
-#     }
-#   }
-# }
-
-# # Configure the Microsoft Azure Provider
-# provider "azurerm" {
-#   features {}
-# }
-
-
  terraform {
    required_version = "=0.12.29"
   backend "azurerm" {
@@ -30,8 +14,30 @@ provider "azurerm" {
   
 }
 
-# Create a resource group
+# Resource Group
 resource "azurerm_resource_group" "rg-k8s" {
   name     = "rg-k8s"
   location = var.rg_location
+}
+
+# Virtual Network
+resource "azurerm_virtual_network" "k8s-network" {
+  name                = var.virtual_network_name
+  location            = azurerm_resource_group.rg-k8s.location
+  resource_group_name = azurerm_resource_group.rg-k8s.name
+  address_space       = [var.virtual_network_address_prefix]
+
+  subnet {
+    name           = var.aks_subnet_name
+    address_prefix = var.aks_subnet_address_prefix
+  }
+
+  # subnet {
+  #   name           = "appgwsubnet"
+  #   address_prefix = var.app_gateway_subnet_address_prefix
+  # }
+
+  # tags = {
+  #   Environment = local.environment
+  # }
 }
