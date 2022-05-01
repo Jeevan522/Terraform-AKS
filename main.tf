@@ -131,6 +131,6 @@ resource "azurerm_kubernetes_cluster" "k8s-aks" {
   #depends_on = [azurerm_virtual_network.ems-network, azurerm_application_gateway.ems-gateway]
 
   tags = {
-    Environment = local.environment
+    Environment = default
   }
 }
