@@ -41,3 +41,10 @@ resource "azurerm_virtual_network" "k8s-network" {
   #   Environment = local.environment
   # }
 }
+
+data "azurerm_subnet" "kubesubnet" {
+  name                 = var.aks_subnet_name
+  virtual_network_name = azurerm_virtual_network.k8s-network.name
+  resource_group_name  = azurerm_resource_group.rg-k8s.name
+  depends_on = [azurerm_virtual_network.k8s-network]
+}
