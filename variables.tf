@@ -31,7 +31,7 @@ variable dns_prefix {
 }
 
 variable node_resource_group {
-  default = "k8s"
+  default = "k8s-NSR"
 }
 
 variable client_id {
