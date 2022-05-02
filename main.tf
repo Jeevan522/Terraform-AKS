@@ -135,6 +135,7 @@ resource "azurerm_kubernetes_cluster" "k8s-aks" {
 }
 
 # PIP Attaching to AGW
+
 resource "azurerm_public_ip" "awg-pip" {
 
   name                = "pip-k8s-agw"
