@@ -217,17 +217,18 @@ resource "azurerm_application_gateway" "agw" {
     port                  = 80
     protocol              = "Http"
     request_timeout       = 1
-	  #probe_name            = "probe"
+	  probe_name            = "probe"
   }
   
-  # probe {
-  #   name                = "probe"
-  #   protocol            = "http"
-  #   path                = "/"
-  #   interval            = "30"
-  #   timeout             = "30"
-  #   unhealthy_threshold = "3"
-  # }
+  probe {
+    name                = "probe"
+    protocol            = "http"
+    path                = "/"
+    host                = "127.0.0.1"
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
+  }
 
   http_listener {
     name                           = local.listener_name
@@ -250,4 +251,11 @@ resource "azurerm_application_gateway" "agw" {
   # } 
 
   depends_on = [azurerm_virtual_network.k8s-network, azurerm_public_ip.awg-pip]
+}
+
+# User Assigned Identity
+resource "azurerm_user_assigned_identity" "test_identity" {
+  name = "identity"
+  location            = azurerm_resource_group.rg-k8s.location
+  resource_group_name = azurerm_resource_group.rg-k8s.name
 }
