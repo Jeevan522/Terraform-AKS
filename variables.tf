@@ -39,5 +39,5 @@ variable client_id {
 }
 
 variable client_secret {
-  default = "027e96c1-faeb-4436-83b9-de4afe9e31ff"
+  default = "87c67180-18c7-46e2-a240-acbc59463688"
 }
