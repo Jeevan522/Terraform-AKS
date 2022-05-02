@@ -262,6 +262,14 @@ resource "azurerm_user_assigned_identity" "test_identity" {
   resource_group_name = azurerm_resource_group.rg-k8s.name
 }
 
+
+resource "azurerm_role_assignment" "writer" {
+  
+  scope                = azurerm_application_gateway.agw.id
+  role_definition_name = "Writer"
+  principal_id         = azurerm_user_assigned_identity.test_identity.principal_id
+  depends_on           = [azurerm_user_assigned_identity.test_identity, azurerm_application_gateway.agw]
+}
 # Contributor to AGW
 
 resource "azurerm_role_assignment" "contributor" {
