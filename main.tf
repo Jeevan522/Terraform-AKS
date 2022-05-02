@@ -144,12 +144,13 @@ resource "azurerm_public_ip" "awg-pip" {
   sku                 = "Standard"
 }
 # Application Gateway
+# URL https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
 
 locals {
     backend_address_pool_name      = "${azurerm_virtual_network.k8s-network.name}-beap"
     frontend_port_name             = "${azurerm_virtual_network.k8s-network.name}-feport"
     frontend_ip_configuration_name = "${azurerm_virtual_network.k8s-network.name}-feip"
-    https_setting_name             = "${azurerm_virtual_network.k8s-network.name}-be-htst"
+    http_setting_name             = "${azurerm_virtual_network.k8s-network.name}-be-htst"
     listener_name                  = "${azurerm_virtual_network.k8s-network.name}-httpslstn"
     request_routing_rule_name      = "${azurerm_virtual_network.k8s-network.name}-rqrt"
     app_gateway_subnet_name        =  var.agw_subnet_name
@@ -208,7 +209,7 @@ resource "azurerm_application_gateway" "agw" {
   }
 
   backend_http_settings {
-    name                  = local.https_setting_name
+    name                  = local.http_setting_name
     cookie_based_affinity = "Disabled"
     # port                  = 443
     # protocol              = "Https"
@@ -230,8 +231,7 @@ resource "azurerm_application_gateway" "agw" {
   http_listener {
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
-    #frontend_port_name             = local.frontend_port_name
-	  frontend_port_name             = "httpPort"
+    frontend_port_name             = local.frontend_port_name
     protocol                       = "http"
 	  #ssl_certificate_name           = "ems-host-server-b"
   }
@@ -241,12 +241,12 @@ resource "azurerm_application_gateway" "agw" {
     rule_type                  = "Basic"
     http_listener_name         = local.listener_name
     backend_address_pool_name  = local.backend_address_pool_name
-    backend_http_settings_name = local.https_setting_name
+    backend_http_settings_name = local.http_setting_name
   }
 
   # tags = {
   #   Environment = local.environment
-  # }
+  # } 
 
   depends_on = [azurerm_virtual_network.k8s-network, azurerm_public_ip.awg-pip]
 }
