@@ -260,19 +260,19 @@ resource "azurerm_user_assigned_identity" "test_identity" {
   resource_group_name = azurerm_resource_group.rg-k8s.name
 }
 
-# Contributor to AGW
-resource "azurerm_role_assignment" "contributor" {
+# # Contributor to AGW
+# resource "azurerm_role_assignment" "contributor" {
   
-  scope                = azurerm_application_gateway.agw.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.test_Identity.principal_id
-  depends_on           = [azurerm_user_assigned_identity.test_Identity, azurerm_application_gateway.agw]
-}
+#   scope                = azurerm_application_gateway.agw.id
+#   role_definition_name = "Contributor"
+#   principal_id         = azurerm_user_assigned_identity.test_identity.principal_id
+#   depends_on           = [azurerm_user_assigned_identity.test_identity, azurerm_application_gateway.agw]
+# }
 
-# Reader to AGW
-resource "azurerm_role_assignment" "reader" {
-  scope                = azurerm_application_gateway.agw.id
-  role_definition_name = "Reader"
-  principal_id         = azurerm_user_assigned_identity.test_Identity.principal_id
-  depends_on           = [azurerm_user_assigned_identity.test_Identity, azurerm_application_gateway.agw]
-}
+# # Reader to AGW
+# resource "azurerm_role_assignment" "reader" {
+#   scope                = azurerm_application_gateway.agw.id
+#   role_definition_name = "Reader"
+#   principal_id         = azurerm_user_assigned_identity.test_identity.principal_id
+#   depends_on           = [azurerm_user_assigned_identity.test_identity, azurerm_application_gateway.agw]
+# }
