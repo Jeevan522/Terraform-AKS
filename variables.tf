@@ -18,6 +18,13 @@ variable aks_subnet_address_prefix {
   default = "10.240.1.0/24"
 }
 
+variable agw_subnet_name {
+  default = "appgwsubnet"
+}
+
+variable agw_subnet_address_prefix {
+  default = "10.240.2.0/24"
+}
 variable aks-name {
     default = "aks-sample"
 }
@@ -40,4 +47,20 @@ variable client_id {
 
 variable client_secret {
   default = "5xc8Q~YWpmEKBZvwZtYTNXj.ouxD0KeaGDSVtc8X"
+}
+
+variable app_gateway_name {
+    default = "k8s-agw"
+}
+
+variable app_gateway_sku {
+    default = "agw-sku"
+}
+
+variable gateway_ip_config {
+    default = "appGatewayIpConfig"
+}
+
+variable http_Port {
+    default = "http"
 }
