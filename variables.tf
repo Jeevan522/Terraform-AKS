@@ -54,7 +54,7 @@ variable app_gateway_name {
 }
 
 variable app_gateway_sku {
-    default = "agw-sku"
+    default = "WAF_v2"
 }
 
 variable gateway_ip_config {
