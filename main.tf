@@ -123,9 +123,9 @@ resource "azurerm_kubernetes_cluster" "k8s-aks" {
     http_application_routing {
       enabled = false
     }
-    kube_dashboard {
-      enabled = true
-    }
+    # kube_dashboard {
+    #   enabled = true
+    # }
   }
   depends_on = [azurerm_virtual_network.k8s-network]
   #depends_on = [azurerm_virtual_network.ems-network, azurerm_application_gateway.ems-gateway]
