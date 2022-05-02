@@ -76,63 +76,10 @@ resource "azurerm_log_analytics_solution" "ems-las" {
     product   = "OMSGallery/ContainerInsights"
   }
 }
-# Azure Kubernetes Service
-
-resource "azurerm_kubernetes_cluster" "k8s-aks" {
-  #for_each = var.ems_app_gateway
-
-  name                = var.aks-name
-  location            = var.rg_location
-  resource_group_name = azurerm_resource_group.rg-k8s.name
-  dns_prefix          = var.dns_prefix
-  kubernetes_version  = var.kubernetes_version
-  node_resource_group = var.node_resource_group
 
 
-  # linux_profile {
-  #   admin_username = "ubuntu"
 
-  #   ssh_key {
-  #     key_data = var.ssh_public_key
-  #   }
-  # }
 
-  
-  network_profile {
-    network_plugin    = "azure"
-  }
-  
-  
-  default_node_pool {
-    name       = "agentpool"
-    node_count = 1
-    vm_size    = "Standard_D2_v2"
-	  vnet_subnet_id  = data.azurerm_subnet.kubesubnet.id
-	
-  }
-  service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
-  }
-  addon_profile {
-    oms_agent {
-      enabled                    = true
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.k8s-law.id
-    }
-    http_application_routing {
-      enabled = false
-    }
-    # kube_dashboard {
-    #   enabled = true
-    # }
-  }
-  depends_on = [azurerm_virtual_network.k8s-network]
-  #depends_on = [azurerm_virtual_network.ems-network, azurerm_application_gateway.ems-gateway]
-
-  # tags = {
-  #   Environment = default
-  # }
-}
 
 # PIP Attaching to AGW
 resource "azurerm_public_ip" "awg-pip" {
